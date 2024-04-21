@@ -6,6 +6,10 @@ latest_commit=$(git rev-parse HEAD)
 # 获取最新的Git标签
 latest_tag=$(git describe --tags --abbrev=0)
 
+alltags=$(git tag)
+
+echo $alltags
+
 # 提取标签信息中的环境和构建号
 environment=$(echo $latest_tag | cut -d '-' -f 1)
 build_number=$(echo $latest_tag | cut -d '-' -f 2)
