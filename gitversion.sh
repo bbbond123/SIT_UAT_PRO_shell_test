@@ -1,7 +1,14 @@
 #!/bin/bash
 
+# 获取最新commit message
 latest_commit=$(git rev-parse HEAD)
 
+# 获取最新的Git标签
+latest_tag=$(git describe --tags --abbrev=0)
+
+# 提取标签信息中的环境和构建号
+environment=$(echo $latest_tag | cut -d '-' -f 1)
+build_number=$(echo $latest_tag | cut -d '-' -f 2)
 
 # 获取最新的Git提交消息
 latest_commit_message=$(git log -1 --pretty=%B)
@@ -19,6 +26,8 @@ else
     echo "No trigger keyword found in commit message: $latest_commit_message. Skipping build."
 fi
 
-
 echo "Building from commit: $latest_commit"
-
+echo "latest_commit : $latest_commit"
+echo "latest_tag : $latest_tag"
+echo "environment : $environment"
+echo "build_number : $build_number"
